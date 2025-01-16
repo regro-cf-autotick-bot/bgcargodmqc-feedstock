@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/bgcArgoDMQC-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/bgcArgoDMQC-{{ version }}.tar.gz
   sha256: d107d761e9284f6a2ec0f38f41addee70d122fd87302f92e4d73e9e9715f3383
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.4
+    - python {{ python_min }}
   run:
     - cmocean
     - gsw
@@ -25,7 +25,7 @@ requirements:
     - netcdf4
     - numpy
     - pandas
-    - python >=3.4
+    - python >={{ python_min }}
     - scipy
     - seaborn
 
@@ -36,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/ArgoCanada/bgcArgoDMQC
